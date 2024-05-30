@@ -1,0 +1,21 @@
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client
+    networks:
+      - client-serv-network
+    depends_on:
+      - server
+  
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: server
+    networks:
+      - client-serv-network
+networks:
+  client-serv-network:
+    driver: bridge
